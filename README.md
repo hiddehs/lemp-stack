@@ -2,11 +2,10 @@
 
 Full LEMP Stack installation inspired by- and using resources from @lucien144 's [lemp-stack](https://github.com/lucien144/lemp-stack)
 
-## Installation
+## Start stacking
 
-Copy & paste the following command to start the lemp.sh installation.
-
-```wget raw...lemp.sh && chmod u+x lemp.sh
+```sh
+wget https://raw.githubusercontent.com/hiddehs/lemp-stack/master/lemp.sh && chmod u+x lemp.sh
 ./lemp.sh
 ```
 
