@@ -9,10 +9,10 @@ fi
 
 apt -y update && apt -y upgrade
 dpkg-reconfigure tzdata
-apt-get -y dist-upgrade ; apt-get -y update ; apt-get -y upgrade
-apt-get -y install unattended-upgrades software-properties-common fail2ban
+apt -y dist-upgrade ; apt -y update ; apt -y upgrade
+apt -y install unattended-upgrades software-properties-common fail2ban
 dpkg-reconfigure -plow unattended-upgrades
-apt-get -y install mc htop
+apt -y install mc htop
 
 echo ufw ssh
 
@@ -24,20 +24,20 @@ cd ~
 
 echo installing full LEMP stack
 
-add-apt-repository -y ppa:nginx/development && apt-get -y update
-apt-get -y install nginx
-apt-get -y install mariadb-server
+add-apt-repository -y ppa:nginx/development && apt -y update
+apt -y install nginx
+apt -y install mariadb-server
 service mysql stop
 mysql_install_db
 service mysql start
-add-apt-repository -y ppa:ondrej/php && apt-get -y update
-apt-get -y install php7.2
-apt-get -y install php7.2-fpm php7.2-curl php7.2-gd php7.2-json php7.2-mysql php7.2-sqlite3 php7.2-pgsql php7.2-bz2 php7.2-mbstring php7.2-soap php7.2-xml php7.2-zip
+add-apt-repository -y ppa:ondrej/php && apt -y update
+apt -y install php7.2
+apt -y install php7.2-fpm php7.2-curl php7.2-gd php7.2-json php7.2-mysql php7.2-sqlite3 php7.2-pgsql php7.2-bz2 php7.2-mbstring php7.2-soap php7.2-xml php7.2-zip
 mysql_secure_installation
 
 add-apt-repository ppa:certbot/certbot
 apt -y update
-apt-get -y install python-certbot-nginx
+apt -y install python-certbot-nginx
 
 echo ufw nginx
 ufw allow 'Nginx Full'
@@ -64,10 +64,10 @@ read -p "Write the Adminer htpasswd user:" htUser;
 htpasswd -c .htpasswd $htUser
 wget https://raw.githubusercontent.com/composer/getcomposer.org/1b137f8bf6db3e79a38a5bc45324414a6b1f9df2/web/installer -O - -q | php -- --quiet
 mv composer.phar /usr/local/bin/composer
-apt-get -y install nodejs
+apt -y install nodejs
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-apt-get -y update && apt-get -y install yarn
+apt -y update && apt -y install yarn
 apt -y upgrade
 
 
