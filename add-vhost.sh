@@ -1,5 +1,5 @@
 read -p "Write the host name, eg. google:" HOST;
-read -p "Write the 1st level domain name without starting dot (.), eg. com.au:" DOMAIN;
+read -p "Write the 1st level domain name / tld without starting dot (.), eg. com.au:" DOMAIN;
 
 mkdir -p /var/www/vhosts/$HOST.$DOMAIN/web
 mkdir -p /var/www/vhosts/$HOST.$DOMAIN/logs
@@ -60,4 +60,10 @@ echo "server {
 ln -s /etc/nginx/sites-available/$HOST.$DOMAIN /etc/nginx/sites-enabled/$HOST.$DOMAIN
 service nginx restart ; systemctl status nginx.service
 
-/usr/bin/certbot --nginx --redirect -d $HOST.$DOMAIN -d www.$HOST.$DOMAIN
+
+read -p "Add Letsencrypt SSL certificate?" -n 1 -r
+echo    
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+	/usr/bin/certbot --nginx --redirect -d $HOST.$DOMAIN -d www.$HOST.$DOMAIN
+fi
