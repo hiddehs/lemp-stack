@@ -1,10 +1,6 @@
 #!/bin/bash
 
-echo starting with basic 
-
-sudo apt-get -y install wget screen
-screen -S lnmp
-
+echo This script requires root.
 
 sudo su
 apt update && apt upgrade
@@ -12,6 +8,7 @@ dpkg-reconfigure tzdata
 apt-get -y dist-upgrade ; apt-get -y update ; apt-get -y upgrade
 apt-get -y install unattended-upgrades software-properties-common apache2-utils fail2ban
 
+echo ufw ssh
 
 apt install ufw
 ufw disable
@@ -38,6 +35,7 @@ add-apt-repository ppa:certbot/certbot
 apt update
 apt-get install python-certbot-apache
 
+echo ufw nginx
 ufw allow 'Nginx Full'
 ufw reload
 
