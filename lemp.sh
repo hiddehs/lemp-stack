@@ -11,14 +11,14 @@ apt update && apt upgrade
 dpkg-reconfigure tzdata
 apt-get -y dist-upgrade ; apt-get -y update ; apt-get -y upgrade
 apt-get -y install unattended-upgrades software-properties-common apache2-utils fail2ban
+dpkg-reconfigure -plow unattended-upgrades
+apt-get -y install mc htop
 
 echo ufw ssh
 
 apt install ufw
 ufw disable
 ufw allow ssh
-ufw enable
-
 
 cd ~
 
@@ -72,3 +72,13 @@ curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 apt-get update && apt-get install yarn
 apt upgrade
+
+
+read -p "Reload Firewall and restart?" -n 1 -r
+echo    
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    ufw enable
+    ufw reload
+    /sbin/reboot
+fi
