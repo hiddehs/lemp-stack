@@ -10,7 +10,7 @@ fi
 apt -y update && apt -y upgrade
 dpkg-reconfigure tzdata
 apt-get -y dist-upgrade ; apt-get -y update ; apt-get -y upgrade
-apt-get -y install unattended-upgrades software-properties-common apache2-utils fail2ban
+apt-get -y install unattended-upgrades software-properties-common fail2ban
 dpkg-reconfigure -plow unattended-upgrades
 apt-get -y install mc htop
 
@@ -37,7 +37,7 @@ mysql_secure_installation
 
 add-apt-repository ppa:certbot/certbot
 apt -y update
-apt-get -y install python-certbot-apache
+apt-get -y install python-certbot-nginx
 
 echo ufw nginx
 ufw allow 'Nginx Full'
