@@ -2,10 +2,12 @@
 
 if [ "$(whoami)" != "root" ]
 then
-    echo This script requires root.
+    echo "This script requires root."
     sudo su -s "$0"
     exit
 fi
+
+echo " >> Updagrading"
 
 apt -y update && apt -y upgrade
 dpkg-reconfigure tzdata
@@ -14,15 +16,14 @@ apt -y install unattended-upgrades software-properties-common fail2ban
 dpkg-reconfigure -plow unattended-upgrades
 apt -y install mc htop
 
-echo ufw ssh
-
+echo " >> Installing ufw and allowing SSH"
 apt -y install ufw
 ufw disable
 ufw allow ssh
 
 cd ~
 
-echo installing full LEMP stack
+echo " >> Installing full LEMP stack..."
 
 add-apt-repository -y ppa:nginx/development && apt -y update
 apt -y install nginx
@@ -39,7 +40,7 @@ add-apt-repository ppa:certbot/certbot
 apt -y update
 apt -y install python-certbot-nginx
 
-echo ufw nginx
+echo " >> Allowing nginx in ufw"
 ufw allow 'Nginx Full'
 ufw reload
 
@@ -60,25 +61,22 @@ wget https://www.adminer.org/latest.php -O index.php
 chmod a+x index.php
 nginx -t && nginx -s reload
 apt -y install apache2-utils 
-read -p "Write the Adminer htpasswd user:" htUser;
+read -p ">> Write the Adminer htpasswd user: " htUser;
 htpasswd -c .htpasswd $htUser
 wget https://raw.githubusercontent.com/composer/getcomposer.org/1b137f8bf6db3e79a38a5bc45324414a6b1f9df2/web/installer -O - -q | php -- --quiet
 mv composer.phar /usr/local/bin/composer
 apt -y install nodejs
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 apt -y update && apt -y install yarn
 apt -y upgrade
 
-
-read -p "Reload Firewall and restart?" -n 1 -r
-echo    
-if [[ $REPLY =~ ^[Yy]$ ]]
+read -r -p ">> Reload firewall and reboot?[y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]
 then
     ufw --force enable
     ufw --force reload
-    echo "done and restarting"
+    echo " >> Done and rebooting..."
     /sbin/reboot
 else
-    echo "done"
+    echo " >> Done"
 fi
