@@ -18,6 +18,18 @@ wget https://raw.githubusercontent.com/hiddehs/lemp-stack/master/add-vhost.sh -O
 
 ## Contents
 
+- Nginx
+- PHP 7.2
+- MariaDB
+  - Adminer web db management
+- Certbot Let's Encrypt
+- Composer
+- NodeJS Yarn
+- vhost management
+  - Nice directory structure in `/var/www/vhost/`
+  - PHP Pool creation
+  - Install Let's Encrypt certificate directly
+
 ## Compatiblity
 
 Compatible and tested with Ubuntu 18.04
