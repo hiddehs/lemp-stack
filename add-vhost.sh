@@ -61,9 +61,11 @@ ln -s /etc/nginx/sites-available/$HOST.$DOMAIN /etc/nginx/sites-enabled/$HOST.$D
 service nginx restart ; systemctl status nginx.service
 
 
-read -p "Add Letsencrypt SSL certificate?" -n 1 -r
+read -p "Add Letsencrypt SSL certificate? [Yy]" -n 1 -r
 echo    
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
+	echo "Adding Letsencrypt..."
 	/usr/bin/certbot --nginx --redirect -d $HOST.$DOMAIN -d www.$HOST.$DOMAIN
 fi
+echo "Done. vhost $HOST.$DOMAIN created and online"
