@@ -1,8 +1,12 @@
 #!/bin/bash
 
-echo This script requires root.
+if [ "$(whoami)" != "root" ]
+then
+    echo This script requires root.
+    sudo su -s "$0"
+    exit
+fi
 
-sudo su
 apt update && apt upgrade
 dpkg-reconfigure tzdata
 apt-get -y dist-upgrade ; apt-get -y update ; apt-get -y upgrade
