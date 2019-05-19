@@ -65,7 +65,7 @@ read -p ">> Write the Adminer htpasswd user: " htUser;
 htpasswd -c .htpasswd $htUser
 wget https://raw.githubusercontent.com/composer/getcomposer.org/1b137f8bf6db3e79a38a5bc45324414a6b1f9df2/web/installer -O - -q | php -- --quiet
 mv composer.phar /usr/local/bin/composer
-apt -y install nodejs
+apt -y install nodejs && apt -y install npm
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 apt -y update && apt -y install yarn
 apt -y upgrade
